@@ -1,8 +1,8 @@
-# Test MCP Server
+# JS Development MCP Server
 
-A Model Context Protocol (MCP) server for simplified JS/TS development. It allows you to run npm scripts in VSCode copilot without requiring manual terminal command approval every time – just the first time. Plus it provides **enhanced discovery capabilities** for increased agent awareness.
+A Model Context Protocol (MCP) server for simplified JS/TS development. It allows you to run npm scripts in VSCode copilot without requiring manual terminal command approval every time – just the first time. Plus it provides **enhanced discovery capabilities**. Increased agent awareness means faster iteration.
 
-Warning: This has a YOLO vibe coding factor of 8/10 – No warranty if this breaks your project, computer, or your life, but it _probably_ won't.
+Warning: Using this has a YOLO vibe coding factor of 8/10 – No warranty if this breaks your project, computer, or your life, but it _probably_ won't.
 
 ## Features
 
