@@ -1,6 +1,6 @@
 {
   "servers": {
-    "test-mcp-server": {
+    "js-mcp": {
       "type": "stdio",
       "command": "node",
       "args": ["./build/index.js"]

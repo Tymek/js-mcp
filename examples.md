@@ -17,7 +17,7 @@ Located at: `%APPDATA%\Claude\claude_desktop_config.json`
 ```json
 {
   "mcpServers": {
-    "test-mcp-server": {
+    "js-mcp": {
       "command": "node",
       "args": ["/absolute/path/to/testmcp/build/index.js"]
     }
