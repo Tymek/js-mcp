@@ -1,6 +1,11 @@
 # JS Development MCP Server
 
-A Model Context Protocol (MCP) server for better JS/TS development. It provides **project tooling discovery**. Increased agent context leads to less friction and struggle with project tooling. Less friction equals faster iteration.
+A Model Context Protocol (MCP) server for better JS/TS development. It enables
+- **accurate scripts use**
+- **project tooling discovery**
+- **improved background tasks**
+
+Better context leads to less friction and struggle with project tooling.
 
 <img src="https://github.com/Tymek/js-mcp/raw/master/js-mcp-demo.gif" alt="JS MCP Demo" style="max-width: 500px;">
 
