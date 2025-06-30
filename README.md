@@ -40,19 +40,6 @@ For VSCode / Claude Desktop:
 > 
 > **Workflow**: Start with `get-help` for guidance, use `project-status` for unknown projects, then use specific tools.
 
-## Installation
-
-```json
-{
-  "mcpServers": {
-    "js-mcp": {
-      "command": "npx",
-      "args": ["js-mcp"]
-    }
-  }
-}
-```
-
 ## Tools
 
 1. **get-help** - Get intelligent recommendations for which tools to use
