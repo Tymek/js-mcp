@@ -2,7 +2,7 @@
 
 A Model Context Protocol (MCP) server for better JS/TS development. It provides **project tooling discovery**. Increased agent context leads to less friction and struggle with project tooling. Less friction equals faster iteration.
 
-<img src="js-mcp-demo.gif" alt="JS MCP Demo" style="max-width: 500px;">
+<img src="https://github.com/Tymek/js-mcp/raw/master/js-mcp-demo.gif" alt="JS MCP Demo" style="max-width: 500px;">
 
 Warning: Using this has a YOLO vibe coding factor of arbitrary 8/10 – No warranty if this breaks your project, computer, or your life, but it _probably_ won't. Don't leave your agents unsupervised. This server allows you to run npm scripts in VSCode copilot without manual terminal command approval every time, so be careful.
 
