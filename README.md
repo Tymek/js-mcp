@@ -1,8 +1,65 @@
 # JS Development MCP Server
 
-A Model Context Protocol (MCP) server for simplified JS/TS development. It allows you to run npm scripts in VSCode copilot without requiring manual terminal command approval every time – just the first time. Plus it provides **enhanced discovery capabilities**. Increased agent awareness means faster iteration.
+A Model Context Protocol (MCP) server for better JS/TS development. It provides **project tooling discovery**. Increased agent context leads to less friction and struggle with project tooling. Less friction equals faster iteration.
 
-Warning: Using this has a YOLO vibe coding factor of 8/10 – No warranty if this breaks your project, computer, or your life, but it _probably_ won't.
+Warning: Using this has a YOLO vibe coding factor of 8/10 – No warranty if this breaks your project, computer, or your life, but it _probably_ won't. Don't leave your agents unsupervised. This server allows you to run npm scripts in VSCode copilot without requiring manual terminal command approval every time – just the first time.
+
+## Instructions for LLM Agents & AI Assistants
+
+> ### 🤖 Agent Instructions for JS/TS Projects
+>
+> In Javascript or Typescript projects, **PREFER TO USE TOOLS INSTEAD OF TERMINAL COMMANDS**:
+> 
+> - `npm test` → **run-tests** (framework detection, better errors)
+> - `npm run build` → **build-project** (optimization detection) 
+> - `npm install` → **install-deps** (auto-detects npm/yarn/pnpm)
+> - `npm run <script>` → **run-script** (background detection, args support)
+> - Checking package.json → **list-scripts** or **project-status**
+> 
+> **Benefits**: No terminal approval prompts, enhanced error context, framework awareness, proper background task management.
+> 
+> **Workflow**: Start with `get-help` for guidance, use `project-status` for unknown projects, then use specific tools.
+
+## Installation
+
+1. Clone or download this project
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Build the project:
+   ```bash
+   npm run build
+   ```
+
+## Usage
+
+### With Claude Desktop
+
+Add the following to your Claude Desktop configuration file (`claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "test-mcp-server": {
+      "command": "node",
+      "args": ["/absolute/path/to/testmcp/build/index.js"]
+    }
+  }
+}
+```
+
+### With VS Code
+
+The project includes a `.vscode/mcp.json` configuration file for VS Code integration.
+
+### Direct Usage
+
+You can also run the server directly:
+
+```bash
+npm start
+```
 
 ## Features
 
@@ -57,47 +114,6 @@ The following tools are available:
 - **Lock File Detection**: Auto-detects npm, yarn, or pnpm based on lock files
 - **Error Context**: Detailed error messages with actionable solutions
 - **Workflow Guidance**: Step-by-step recommendations for common development tasks
-
-## Installation
-
-1. Clone or download this project
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Build the project:
-   ```bash
-   npm run build
-   ```
-
-## Usage
-
-### With Claude Desktop
-
-Add the following to your Claude Desktop configuration file (`claude_desktop_config.json`):
-
-```json
-{
-  "mcpServers": {
-    "test-mcp-server": {
-      "command": "node",
-      "args": ["/absolute/path/to/testmcp/build/index.js"]
-    }
-  }
-}
-```
-
-### With VS Code
-
-The project includes a `.vscode/mcp.json` configuration file for VS Code integration.
-
-### Direct Usage
-
-You can also run the server directly:
-
-```bash
-npm start
-```
 
 ## Development
 
@@ -182,12 +198,6 @@ The server intelligently determines when scripts should run in background:
 - Missing scripts: Provides intelligent suggestions for similar script names
 - Dependency issues: Clear guidance on resolving missing node_modules
 - Framework conflicts: Detects and suggests fixes for common configuration issues
-
-## Requirements
-
-- Node.js 16 or higher
-- npm, yarn, or pnpm
-- TypeScript (installed as dev dependency)
 
 ## License
 
