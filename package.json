@@ -1,6 +1,6 @@
 {
   "name": "js-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCP server for JS/TS development with intelligent project tooling and testing capabilities",
   "main": "build/index.js",
   "type": "module",
@@ -31,6 +31,10 @@
   ],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tymek/js-mcp.git"
+  },
   "devDependencies": {
     "@types/node": "^24.0.4",
     "typescript": "^5.8.3"
