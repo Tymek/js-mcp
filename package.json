@@ -1,22 +1,33 @@
 {
-  "name": "testmcp",
+  "name": "js-mcp",
   "version": "1.0.0",
-  "description": "MCP server for testing NextJS projects",
+  "description": "MCP server for JS/TS development with intelligent project tooling and testing capabilities",
   "main": "build/index.js",
   "type": "module",
   "bin": {
-    "testmcp": "./build/index.js"
+    "js-mcp": "./build/index.js"
   },
+  "files": [
+    "build/**/*",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
     "start": "node build/index.js",
     "dev": "tsc && node build/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "mcp",
+    "model-context-protocol",
+    "javascript",
+    "typescript",
+    "development-tools",
     "testing",
-    "scim"
+    "build-tools",
+    "project-management"
   ],
   "author": "",
   "license": "ISC",
