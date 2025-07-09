@@ -2,7 +2,7 @@ import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { executeCommand } from "../utils.js";
 import { getProjectContext } from "../project.js";
-import { ProjectPathSchema, PackageManagerSchema } from "../schemas.js";
+import { ProjectPathSchema, PackageManagerSchema, TimeoutSchema } from "../schemas.js";
 
 export const registerInstallTool = (server: McpServer) => {
   server.tool(
@@ -12,8 +12,9 @@ export const registerInstallTool = (server: McpServer) => {
       projectPath: ProjectPathSchema,
       packageManager: PackageManagerSchema,
       production: z.boolean().optional().default(false).describe("Install only production dependencies, excluding devDependencies. Useful for deployment scenarios where development tools are not needed."),
+      timeout: TimeoutSchema,
     },
-    async ({ projectPath, packageManager = "npm", production = false }) => {
+    async ({ projectPath, packageManager = "npm", production = false, timeout }) => {
       try {
         const context = await getProjectContext(projectPath);
         
@@ -37,7 +38,9 @@ export const registerInstallTool = (server: McpServer) => {
           else if (packageManager === 'pnpm') args.push('--prod');
         }
 
-        const result = await executeCommand(packageManager, args, context.workingDir);
+        // Use custom timeout if provided, otherwise use longer default for dependency installs (60s)
+        const timeoutMs = timeout ?? 60_000;
+        const result = await executeCommand(packageManager, args, context.workingDir, timeoutMs);
         
         const status = result.success ? '✅ Installation successful' : '❌ Installation failed';
         const frameworkInfo = context.framework ? ` (${context.framework} project)` : '';

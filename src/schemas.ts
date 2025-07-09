@@ -28,3 +28,7 @@ export const ScriptNameSchema = z.string().describe(
 export const ScriptArgsSchema = z.array(z.string()).optional().describe(
   "Additional command-line arguments to pass to the script. Examples: ['--watch', '--verbose'], ['--port', '3001'], ['--env', 'staging']."
 );
+
+export const TimeoutSchema = z.number().min(1000).max(300000).optional().describe(
+  "Custom timeout in milliseconds for command execution. Minimum: 1000ms (1s), Maximum: 300000ms (5m). If not provided, defaults are used: 30s for most commands, 60s for long-running scripts, 90s for e2e tests."
+);

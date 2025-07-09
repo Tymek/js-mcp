@@ -60,6 +60,7 @@ For VSCode / Claude Desktop:
 - **Background Task Management**: Auto-detection for dev servers, manual control, output capture
 - **Smart Error Handling**: Contextual suggestions and dependency checking
 - **Package Manager Detection**: Auto-detects npm, yarn, or pnpm from lock files
+- **Custom Timeout Support**: Configure timeouts (1s-5m) for long-running commands, with smart defaults
 
 ### Background Task Auto-Detection
 

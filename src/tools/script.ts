@@ -3,7 +3,7 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { executeCommand } from "../utils.js";
 import { executeBackgroundCommand, shouldAutoDetectBackground } from "../background.js";
 import { getProjectContext, validateDependencies, validateScript } from "../project.js";
-import { ProjectPathSchema, ScriptNameSchema, ScriptArgsSchema } from "../schemas.js";
+import { ProjectPathSchema, ScriptNameSchema, ScriptArgsSchema, TimeoutSchema } from "../schemas.js";
 
 export const registerScriptTool = (server: McpServer) => {
   server.tool(
@@ -16,8 +16,9 @@ export const registerScriptTool = (server: McpServer) => {
       background: z.boolean().optional().default(false).describe(
         "Run the script in background mode for long-running processes like development servers. When true, the tool returns immediately after starting the process, allowing it to run continuously. Use for 'dev', 'start', 'serve' and similar commands."
       ),
+      timeout: TimeoutSchema,
     },
-    async ({ scriptName, projectPath, args = [], background = false }) => {
+    async ({ scriptName, projectPath, args = [], background = false, timeout }) => {
       try {
         const context = await getProjectContext(projectPath);
         validateScript(context, scriptName);
@@ -36,10 +37,10 @@ export const registerScriptTool = (server: McpServer) => {
         if (shouldRunInBackground) {
           result = await executeBackgroundCommand('npm', command, context.workingDir);
         } else {
-          // For non-background processes, use appropriate timeouts
-          const isLongRunning = scriptName.toLowerCase().includes('e2e') || 
-                               scriptName.toLowerCase().includes('test');
-          const timeoutMs = isLongRunning ? 60000 : 30000; // 1 min for e2e/tests, 30s for others
+          // Use custom timeout if provided, otherwise use defaults based on script type
+          const defaultTimeout = (scriptName.toLowerCase().includes('e2e') || 
+                                 scriptName.toLowerCase().includes('test')) ? 60000 : 30000;
+          const timeoutMs = timeout ?? defaultTimeout;
           result = await executeCommand('npm', command, context.workingDir, timeoutMs);
         }
         

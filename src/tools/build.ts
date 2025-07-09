@@ -2,7 +2,7 @@ import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { executeCommand } from "../utils.js";
 import { getProjectContext, validateDependencies, validateScript } from "../project.js";
-import { ProjectPathSchema, BuildScriptSchema } from "../schemas.js";
+import { ProjectPathSchema, BuildScriptSchema, TimeoutSchema } from "../schemas.js";
 
 export const registerBuildTool = (server: McpServer) => {
   server.tool(
@@ -12,8 +12,9 @@ export const registerBuildTool = (server: McpServer) => {
       projectPath: ProjectPathSchema,
       buildScript: BuildScriptSchema,
       production: z.boolean().optional().default(false).describe("Build for production environment with optimizations enabled. Sets NODE_ENV=production and typically enables minification, tree-shaking, and other optimizations."),
+      timeout: TimeoutSchema,
     },
-    async ({ projectPath, buildScript = "build", production = false }) => {
+    async ({ projectPath, buildScript = "build", production = false, timeout }) => {
       try {
         const context = await getProjectContext(projectPath);
         validateScript(context, buildScript);
@@ -21,7 +22,9 @@ export const registerBuildTool = (server: McpServer) => {
 
         const buildEnv = production ? 'production' : 'development';
         
-        const result = await executeCommand('npm', ['run', buildScript], context.workingDir);
+        // Use custom timeout if provided, otherwise use default (30s)
+        const timeoutMs = timeout ?? 30000;
+        const result = await executeCommand('npm', ['run', buildScript], context.workingDir, timeoutMs);
         
         const status = result.success ? '✅ Build successful' : '❌ Build failed';
         const frameworkInfo = context.framework ? ` (${context.framework} project)` : '';

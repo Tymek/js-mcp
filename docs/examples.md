@@ -151,3 +151,56 @@ If enhanced discovery isn't working:
 2. Verify the enhanced index.js file: `ls -la build/index.js`
 3. Test manually: `echo '{"tool": "project-status", "arguments": {}}' | node build/index.js`
 4. Check Claude Desktop logs for tool discovery information
+
+### Timeout Configuration Examples
+
+#### Custom Timeout for Long-Running Commands
+```json
+{
+  "tool": "run-tests",
+  "arguments": {
+    "testScript": "test:e2e",
+    "timeout": 180000
+  }
+}
+```
+
+#### Building Large Projects with Extended Timeout
+```json
+{
+  "tool": "build-project",
+  "arguments": {
+    "production": true,
+    "timeout": 120000
+  }
+}
+```
+
+#### Script Execution with Custom Timeout
+```json
+{
+  "tool": "run-script",
+  "arguments": {
+    "scriptName": "lint:full",
+    "timeout": 90000
+  }
+}
+```
+
+#### Dependency Installation with Extended Timeout
+```json
+{
+  "tool": "install-deps",
+  "arguments": {
+    "packageManager": "npm",
+    "timeout": 240000
+  }
+}
+```
+
+#### Timeout Best Practices
+- **Unit tests**: 30s (default)
+- **Integration tests**: 60s
+- **E2E tests**: 90-180s
+- **Large builds**: 120-300s
+- **Dependency installs**: 60-240s
