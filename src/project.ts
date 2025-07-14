@@ -20,8 +20,8 @@ export const findProjectRoot = async (startPath: string): Promise<string> => {
     }
     currentPath = path.dirname(currentPath);
   }
-  
-  throw new Error('package.json not found in directory tree');
+
+  throw new Error('package.json not found in directory tree. Try passing a project path explicitly.');
 };
 
 export const getProjectContext = async (projectPath?: string): Promise<ProjectContext> => {
